@@ -1,4 +1,6 @@
 This is a project to stand a a reproducible repo for a realm js bug on versions > 12.2.1.
+(https://github.com/realm/realm-js/issues/6889)
+
 I used node 18.18.
 
 > yarn (to install all libraries)
