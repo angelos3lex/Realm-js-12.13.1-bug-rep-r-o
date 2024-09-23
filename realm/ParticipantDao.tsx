@@ -11,10 +11,6 @@ export default class ParticipantDao extends Dao<ParticipantRealmObject> {
     this.metaDao = new ParticipantMetaDao(db);
   }
 
-  public wrap(dbModel: ParticipantRealmObject): ParticipantRealmObject {
-    return dbModel;
-  }
-
   public add(add: ParticipantRealmObject) {
     this.db.executeTransaction(() => {
       if (add.metaFields) {

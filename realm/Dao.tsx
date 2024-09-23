@@ -27,12 +27,11 @@ export default abstract class Dao<R extends BaseRealmObject> {
   }
 
   public getAll(): Array<R> {
-    return this.db.findAll<R>(this.schema).map(it => this.wrap(it));
+    return this.db.findAll<R>(this.schema);
   }
 
   public findByCode(code: string): R | undefined {
-    const realmObject = this.db.findByCode<R>(code, this.schema);
-    return realmObject ? this.wrap(realmObject) : undefined;
+    return this.db.findByCode<R>(code, this.schema);
   }
 
   public executeTransaction(runnable: Function) {
@@ -40,6 +39,4 @@ export default abstract class Dao<R extends BaseRealmObject> {
       runnable();
     });
   }
-
-  public abstract wrap(dbModel: R): R;
 }

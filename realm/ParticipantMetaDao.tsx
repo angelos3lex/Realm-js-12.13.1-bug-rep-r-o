@@ -6,8 +6,4 @@ export default class ParticipantMetaDao extends Dao<ParticipantMetaRealmObject> 
   constructor(db: RealmDb) {
     super(db, ParticipantMetaRealmObject.schema.name);
   }
-
-  public wrap(dbModel: ParticipantMetaRealmObject): ParticipantMetaRealmObject {
-    return dbModel;
-  }
 }
