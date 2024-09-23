@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
-import Participant from './realm/Participant';
+import {ParticipantRealmObject} from './realm/Participant';
 import ParticipantDao from './realm/ParticipantDao';
-import ParticipantMeta from './realm/ParticipantMeta';
+import {ParticipantMetaRealmObject} from './realm/ParticipantMeta';
 import RealmDb from './realm/RealmDb';
 const db = RealmDb.instance();
 
@@ -10,10 +10,15 @@ function App(): React.JSX.Element {
   const addAndUpdateParticipant = () => {
     const participantDao = new ParticipantDao(db);
 
-    const participant = new Participant();
+    const participant = {} as ParticipantRealmObject;
     participant.firstName = 'Chandler';
     participant.lastName = 'Bing';
-    participant.putMetaString(ParticipantMeta.ADDRESS, '15 Yemen Road, Yemen');
+    participant.metaFields = [];
+    const metaKey = {
+      metaKey: 'ADDRESS',
+      metaValue: '15 Yemen Road, Yemen',
+    } as ParticipantMetaRealmObject;
+    participant.metaFields.push(metaKey);
 
     participantDao.add(participant);
 

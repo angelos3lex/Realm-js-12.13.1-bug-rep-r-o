@@ -1,12 +1,9 @@
 import Dao from './Dao';
-import Participant, {ParticipantRealmObject} from './Participant';
+import {ParticipantRealmObject} from './Participant';
 import ParticipantMetaDao from './ParticipantMetaDao';
 import RealmDb from './RealmDb';
 
-export default class ParticipantDao extends Dao<
-  Participant,
-  ParticipantRealmObject
-> {
+export default class ParticipantDao extends Dao<ParticipantRealmObject> {
   private metaDao: ParticipantMetaDao;
 
   constructor(db: RealmDb) {
@@ -14,11 +11,11 @@ export default class ParticipantDao extends Dao<
     this.metaDao = new ParticipantMetaDao(db);
   }
 
-  public wrap(dbModel: ParticipantRealmObject): Participant {
-    return Participant.wrap(dbModel);
+  public wrap(dbModel: ParticipantRealmObject): ParticipantRealmObject {
+    return dbModel;
   }
 
-  public add(add: Participant) {
+  public add(add: ParticipantRealmObject) {
     this.db.executeTransaction(() => {
       if (add.metaFields) {
         Array.from(add.metaFields).forEach(meta => this.metaDao.add(meta));
